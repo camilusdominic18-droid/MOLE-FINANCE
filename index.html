@@ -1,3 +1,32 @@
+<script>
+  async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Add Logo
+    const img = new Image();
+    img.src = "assets/logo.png"; // path to your logo in repo
+    img.onload = function() {
+      doc.addImage(img, "PNG", 150, 10, 40, 20); // position + size
+
+      // Title in gold
+      doc.setTextColor(218,165,32); // gold color (RGB)
+      doc.setFontSize(18);
+      doc.text("MOLE FINANCE Loan Quote", 20, 20);
+
+      // Reset text color to black
+      doc.setTextColor(0,0,0);
+      doc.setFontSize(12);
+      doc.text(`Loan Amount: PGK ${document.getElementById('amount').value}`, 20, 50);
+      doc.text(`Interest Rate: ${document.getElementById('rate').value}%`, 20, 60);
+      doc.text(`Loan Term: ${document.getElementById('years').value} years`, 20, 70);
+      doc.text(`Monthly Repayment: PGK ${repayment.toFixed(2)}`, 20, 90);
+      doc.text(`Total Payment: PGK ${total.toFixed(2)}`, 20, 100);
+
+      doc.save("LoanQuote.pdf");
+    };
+  }
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
