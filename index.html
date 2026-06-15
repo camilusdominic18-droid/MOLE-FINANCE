@@ -1,4 +1,11 @@
-<script>
+<<label>Paydays:</label>
+<select id="paydays">
+  <option value="1">1 Payday</option>
+  <option value="2">2 Paydays</option>
+  <option value="3">3 Paydays</option>
+  <option value="4">4 Paydays</option>
+</select>
+script>
   function calculateLoan() {
     const amount = parseFloat(document.getElementById('amount').value);
     const paydays = parseInt(document.getElementById('paydays').value);
