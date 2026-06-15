@@ -1,4 +1,64 @@
-<script<label>Paydays:</label>
+<s<script>
+  let repayment, totalRepayment, installmentAmount, interestRate;
+
+  function calculateLoan() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const paydays = parseInt(document.getElementById('paydays').value);
+
+    // Interest mapping from Database.xlsx Settings
+    switch(paydays) {
+      case 1: interestRate = 0.20; break;
+      case 2: interestRate = 0.30; break;
+      case 3: interestRate = 0.40; break;
+      case 4: interestRate = 0.50; break;
+      default: interestRate = 0;
+    }
+
+    if (isNaN(amount) || isNaN(paydays) || interestRate === 0) {
+      document.getElementById('result').innerText = "Please fill in all fields.";
+      return;
+    }
+
+    // Repayment formula (same as Excel Database)
+    totalRepayment = amount + (amount * interestRate);
+    installmentAmount = totalRepayment / paydays;
+
+    document.getElementById('result').innerHTML =
+      `Paydays: ${paydays}<br>` +
+      `Interest Rate: ${(interestRate*100).toFixed(0)}%<br>` +
+      `Total Repayment: PGK ${totalRepayment.toFixed(2)}<br>` +
+      `Installment Amount: PGK ${installmentAmount.toFixed(2)} per payday`;
+  }
+
+  async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Branding
+    doc.setTextColor(218,165,32); // gold
+    doc.setFontSize(18);
+    doc.text("MOLE FINANCE Loan Quote", 20, 20);
+
+    // Reset to black
+    doc.setTextColor(0,0,0);
+    doc.setFontSize(12);
+
+    // Client details
+    doc.text(`Client Name: ${document.getElementById('clientName').value}`, 20, 40);
+    doc.text(`Email: ${document.getElementById('clientEmail').value}`, 20, 50);
+    doc.text(`Phone: ${document.getElementById('clientPhone').value}`, 20, 60);
+
+    // Loan details (matching Database.xlsx Loan Calculator)
+    doc.text(`Loan Amount: PGK ${document.getElementById('amount').value}`, 20, 80);
+    doc.text(`Paydays: ${document.getElementById('paydays').value}`, 20, 90);
+    doc.text(`Interest Rate: ${(interestRate*100).toFixed(0)}%`, 20, 100);
+    doc.text(`Total Repayment: PGK ${totalRepayment.toFixed(2)}`, 20, 110);
+    doc.text(`Installment Amount: PGK ${installmentAmount.toFixed(2)} per payday`, 20, 120);
+
+    doc.save("LoanQuote.pdf");
+  }
+</script>
+cript<label>Paydays:</label>
 <select id="paydays">
   <option value="1">1 Payday</option>
   <option value="2">2 Paydays</option>
