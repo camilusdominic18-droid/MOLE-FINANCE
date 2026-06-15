@@ -1,4 +1,53 @@
-<s<<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<sasync function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Branding
+  doc.setTextColor(218,165,32); // gold
+  doc.setFontSize(18);
+  doc.text("MOLE FINANCE Loan Quote", 20, 20);
+
+  // Reset to black
+  doc.setTextColor(0,0,0);
+  doc.setFontSize(12);
+
+  // Client details section
+  doc.text("Client Details", 20, 40);
+  doc.autoTable({
+    startY: 45,
+    head: [['Field', 'Value']],
+    body: [
+      ['Client Name', document.getElementById('clientName').value],
+      ['Email', document.getElementById('clientEmail').value],
+      ['Phone', document.getElementById('clientPhone').value]
+    ],
+    theme: 'grid',
+    styles: { fillColor: [240,240,240] }
+  });
+
+  // Loan details section
+  doc.text("Loan Details", 20, doc.lastAutoTable.finalY + 15);
+  doc.autoTable({
+    startY: doc.lastAutoTable.finalY + 20,
+    head: [['Field', 'Value']],
+    body: [
+      ['Loan Amount', `PGK ${document.getElementById('amount').value}`],
+      ['Paydays', document.getElementById('paydays').value],
+      ['Interest Rate', `${(interestRate*100).toFixed(0)}%`],
+      ['Total Repayment', `PGK ${totalRepayment.toFixed(2)}`],
+      ['Installment Amount', `PGK ${installmentAmount.toFixed(2)} per payday`]
+    ],
+    theme: 'grid',
+    styles: { fillColor: [240,240,240] }
+  });
+
+  // Footer
+  doc.setFontSize(10);
+  doc.text("MOLE FINANCE • Responsible Borrowing • Contact: info@molefinance.pg", 20, 280);
+
+  doc.save("LoanQuote.pdf");
+}
+<<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 script>
   let repayment, totalRepayment, installmentAmount, interestRate;
 
