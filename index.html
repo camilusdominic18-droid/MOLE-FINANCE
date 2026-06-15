@@ -1,3 +1,37 @@
+<script>
+  let totalRepayment, installmentAmount, interestRate;
+
+  function calculateLoan() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const paydays = parseInt(document.getElementById('paydays').value);
+
+    // Interest mapping from Database.xlsx Settings
+    switch(paydays) {
+      case 1: interestRate = 0.20; break;
+      case 2: interestRate = 0.30; break;
+      case 3: interestRate = 0.40; break;
+      case 4: interestRate = 0.50; break;
+      default: interestRate = 0;
+    }
+
+    // Validation
+    if (isNaN(amount) || isNaN(paydays) || interestRate === 0) {
+      document.getElementById('result').innerText = "Please fill in all fields.";
+      return;
+    }
+
+    // Repayment formula
+    totalRepayment = amount + (amount * interestRate);
+    installmentAmount = totalRepayment / paydays;
+
+    // Show results
+    document.getElementById('result').innerHTML =
+      `Paydays: ${paydays}<br>` +
+      `Interest Rate: ${(interestRate*100).toFixed(0)}%<br>` +
+      `Total Repayment: PGK ${totalRepayment.toFixed(2)}<br>` +
+      `Installment Amount: PGK ${installmentAmount.toFixed(2)} per payday`;
+  }
+</script>
 let totalRepayment, installmentAmount, interestRate;
 
 function calculateLoan() {
