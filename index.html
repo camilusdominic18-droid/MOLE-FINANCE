@@ -1,3 +1,8 @@
+if (isNaN(amount) || isNaN(paydays) || interestRate === 0) {
+  document.getElementById('result').innerText = "Please fill in all fields.";
+  return;
+}
+
 Amount: 1000 Paydays: 2 Interest: 0.3
 
 console.log("Amount:", amount, "Paydays:", paydays, "Interest:", interestRate);
