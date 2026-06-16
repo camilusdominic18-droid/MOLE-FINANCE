@@ -198,4 +198,12 @@ Add repayment schedule table to calculator
     <!-- Rows will be generated here -->
   </tbody>
 </table>
+// Clear previous schedule
+document.getElementById("scheduleTable").innerHTML = "";
+
+// Generate rows for each payday
+for (let i = 1; i <= paydays; i++) {
+  let row = "<tr><td>" + i + "</td><td>PGK " + installmentAmount.toFixed(2) + "</td></tr>";
+  document.getElementById("scheduleTable").innerHTML += row;
+}
 
