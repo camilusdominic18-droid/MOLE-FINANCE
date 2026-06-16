@@ -206,4 +206,32 @@ for (let i = 1; i <= paydays; i++) {
   let row = "<tr><td>" + i + "</td><td>PGK " + installmentAmount.toFixed(2) + "</td></tr>";
   document.getElementById("scheduleTable").innerHTML += row;
 }
+<h3>Repayment Schedule</h3>
+<table border="1" style="width:100%; border-collapse:collapse; text-align:center;">
+  <thead>
+    <tr>
+      <th>Payday</th>
+      <th>Installment Amount (PGK)</th>
+    </tr>
+  </thead>
+  <tbody id="scheduleTable">
+    <!-- Rows will be generated here -->
+  </tbody>
+</table>
+// Clear previous schedule
+document.getElementById("scheduleTable").innerHTML = "";
+
+// Generate rows for each payday
+for (let i = 1; i <= paydays; i++) {
+  let row = "<tr><td>" + i + "</td><td>PGK " + installmentAmount.toFixed(2) + "</td></tr>";
+  document.getElementById("scheduleTable").innerHTML += row;
+}
+// Clear previous schedule
+document.getElementById("scheduleTable").innerHTML = "";
+
+// Generate rows for each payday
+for (let i = 1; i <= paydays; i++) {
+  let row = "<tr><td>" + i + "</td><td>PGK " + installmentAmount.toFixed(2) + "</td></tr>";
+  document.getElementById("scheduleTable").innerHTML += row;
+}
 
