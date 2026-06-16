@@ -345,4 +345,34 @@ for (let i = 1; i <= paydays; i++) {
   scheduleBody.appendChild(row);
 }
 Fix repayment schedule rendering in table form
+document.getElementById("downloadBtn").addEventListener("click", function() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Client details
+  doc.setFontSize(14);
+  doc.text("MOLE MINI FINANCE Loan Quote", 10, 20);
+  doc.setFontSize(12);
+  doc.text("Client Name: " + document.getElementById("clientName").value, 10, 30);
+  doc.text("Client Email: " + document.getElementById("clientEmail").value, 10, 40);
+  doc.text("Client Phone: " + document.getElementById("clientPhone").value, 10, 50);
+
+  // Loan summary
+  doc.text("Loan Amount (PGK): " + loanAmount.toFixed(2), 10, 70);
+  doc.text("Paydays: " + paydays, 10, 80);
+  doc.text("Interest Rate: 30%", 10, 90);
+  doc.text("Total Repayment: PGK " + totalRepayment.toFixed(2), 10, 100);
+  doc.text("Installment Amount: PGK " + installmentAmount.toFixed(2), 10, 110);
+
+  // Repayment schedule
+  doc.text("Repayment Schedule:", 10, 130);
+  let startY = 140;
+  for (let i = 1; i <= paydays; i++) {
+    doc.text("Payday " + i + ": PGK " + installmentAmount.toFixed(2), 10, startY);
+    startY += 10;
+  }
+
+  // Save PDF
+  doc.save("LoanQuote.pdf");
+});
 
