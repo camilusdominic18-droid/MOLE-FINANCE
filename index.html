@@ -247,4 +247,28 @@ Fix repayment schedule to display in table form
     <!-- JavaScript will insert rows here -->
   </tbody>
 </table>
+// Clear previous schedule
+const scheduleBody = document.getElementById("scheduleTable");
+scheduleBody.innerHTML = "";
+
+// Generate rows for each payday
+for (let i = 1; i <= paydays; i++) {
+  // Create a new row
+  let row = document.createElement("tr");
+
+  // Create payday cell
+  let paydayCell = document.createElement("td");
+  paydayCell.textContent = i;
+
+  // Create installment cell
+  let installmentCell = document.createElement("td");
+  installmentCell.textContent = "PGK " + installmentAmount.toFixed(2);
+
+  // Append cells to row
+  row.appendChild(paydayCell);
+  row.appendChild(installmentCell);
+
+  // Append row to table body
+  scheduleBody.appendChild(row);
+}
 
