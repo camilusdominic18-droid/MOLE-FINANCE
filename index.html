@@ -99,3 +99,57 @@ git push origin main
     document.getElementById('schedule').style.display = "table";
   }
 </script>
+<table id="schedule" style="display:none;">
+  <thead>
+    <tr>
+      <th>Payday</th>
+      <th>Repayment (PGK)</th>
+      <th>Remaining Balance (PGK)</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  function calculateLoan() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const paydays = parseInt(document.getElementById('paydays').value);
+
+    if (isNaN(amount) || isNaN(paydays) || paydays <= 0) {
+      document.getElementById('result').textContent = "Please enter valid values.";
+      document.getElementById('schedule').style.display = "none";
+      return;
+    }
+
+    const repayment = (amount / paydays).toFixed(2);
+    document.getElementById('result').textContent =
+      `Loan Amount: PGK ${amount} | Paydays: ${paydays} | Repayment per payday: PGK ${repayment}`;
+
+    // Build repayment schedule table
+    const tbody = document.querySelector("#schedule tbody");
+    tbody.innerHTML = ""; // clear old rows
+    let balance = amount;
+
+    for (let i = 1; i <= paydays; i++) {
+      balance -= repayment;
+      const row = document.createElement("tr");
+
+      const paydayCell = document.createElement("td");
+      paydayCell.textContent = i;
+
+      const repaymentCell = document.createElement("td");
+      repaymentCell.textContent = `PGK ${repayment}`;
+
+      const balanceCell = document.createElement("td");
+      balanceCell.textContent = `PGK ${balance.toFixed(2)}`;
+
+      row.appendChild(paydayCell);
+      row.appendChild(repaymentCell);
+      row.appendChild(balanceCell);
+
+      tbody.appendChild(row);
+    }
+
+    document.getElementById('schedule').style.display = "table";
+  }
+</script>
