@@ -208,3 +208,118 @@ git push origin main
   }
 </script>
 Add repayment schedule table to loan calculator
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOLE FINANCE Loan Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1 { color: #333; }
+    label { display: block; margin-top: 10px; }
+    input { padding: 5px; margin-top: 5px; width: 250px; }
+    button { margin-top: 15px; padding: 8px 12px; }
+    #result { margin-top: 20px; font-weight: bold; }
+    table { margin-top: 20px; border-collapse: collapse; width: 100%; max-width: 700px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    .section { margin-top: 25px; }
+  </style>
+</head>
+<body>
+  <h1>MOLE FINANCE Loan Calculator</h1>
+
+  <!-- Client Details Section -->
+  <div class="section">
+    <h2>Client Details</h2>
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" placeholder="Enter full name">
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" placeholder="Enter email">
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" placeholder="Enter phone number">
+  </div>
+
+  <!-- Loan Calculator Section -->
+  <div class="section">
+    <h2>Loan Information</h2>
+    <label for="amount">Loan Amount (PGK):</label>
+    <input type="number" id="amount" placeholder="Enter amount">
+
+    <label for="paydays">Number of Paydays:</label>
+    <input type="number" id="paydays" placeholder="Enter paydays">
+
+    <button onclick="calculateLoan()">Calculate</button>
+  </div>
+
+  <!-- Result + Schedule -->
+  <div id="result"></div>
+
+  <table id="schedule" style="display:none;">
+    <thead>
+      <tr>
+        <th>Payday</th>
+        <th>Repayment (PGK)</th>
+        <th>Remaining Balance (PGK)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    function calculateLoan() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const paydays = parseInt(document.getElementById('paydays').value);
+
+      if (!name || !email || !phone) {
+        document.getElementById('result').textContent = "Please fill in all client details.";
+        document.getElementById('schedule').style.display = "none";
+        return;
+      }
+
+      if (isNaN(amount) || isNaN(paydays) || paydays <= 0) {
+        document.getElementById('result').textContent = "Please enter valid loan values.";
+        document.getElementById('schedule').style.display = "none";
+        return;
+      }
+
+      const repayment = (amount / paydays).toFixed(2);
+      document.getElementById('result').textContent =
+        `Client: ${name} | Email: ${email} | Phone: ${phone}\n` +
+        `Loan Amount: PGK ${amount} | Paydays: ${paydays} | Repayment per payday: PGK ${repayment}`;
+
+      // Build repayment schedule
+      const tbody = document.querySelector("#schedule tbody");
+      tbody.innerHTML = "";
+      let balance = amount;
+
+      for (let i = 1; i <= paydays; i++) {
+        balance -= repayment;
+        const row = document.createElement("tr");
+
+        const paydayCell = document.createElement("td");
+        paydayCell.textContent = i;
+
+        const repaymentCell = document.createElement("td");
+        repaymentCell.textContent = `PGK ${repayment}`;
+
+        const balanceCell = document.createElement("td");
+        balanceCell.textContent = `PGK ${balance.toFixed(2)}`;
+
+        row.appendChild(paydayCell);
+        row.appendChild(repaymentCell);
+        row.appendChild(balanceCell);
+
+        tbody.appendChild(row);
+      }
+
+      document.getElementById('schedule').style.display = "table";
+    }
+  </script>
+</body>
+</html>
