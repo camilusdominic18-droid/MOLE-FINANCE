@@ -1156,4 +1156,52 @@ cd Download
 <button onclick="calculateLoan()">Calculate</button>
 <button onclick="downloadPDF()">Download PDF</button>
 <button onclick="sendEmail()">Send Quote</button>
+async function downloadPDF() {
+  if (!latestData) {
+    alert("Please calculate loan first.");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Add full letterhead banner at top
+  const img = new Image();
+  img.src = "assets/letterhead.png"; // your uploaded banner
+  doc.addImage(img, "PNG", 10, 10, 190, 40);
+
+  // Move text down to avoid overlapping banner
+  let y = 60;
+
+  doc.setFontSize(16);
+  doc.setTextColor(218,165,32); // gold
+  doc.text("MOLE FINANCE Loan Quote", 20, y);
+
+  y += 15;
+  doc.setFontSize(12);
+  doc.setTextColor(0,0,0);
+  doc.text(`Client: ${latestData.name}`, 20, y); y += 7;
+  doc.text(`Email: ${latestData.email}`, 20, y); y += 7;
+  doc.text(`Phone: ${latestData.phone}`, 20, y); y += 12;
+
+  doc.text(`Loan Amount: PGK ${latestData.amount}`, 20, y); y += 7;
+  doc.text(`Paydays: ${latestData.paydays}`, 20, y); y += 7;
+  doc.text(`Repayment per payday: PGK ${latestData.repayment}`, 20, y); y += 12;
+
+  // Table header
+  doc.setTextColor(218,165,32);
+  doc.text("Payday", 20, y);
+  doc.text("Repayment (PGK)", 70, y);
+  doc.text("Remaining Balance (PGK)", 140, y);
+
+  doc.setTextColor(0,0,0);
+  latestData.scheduleData.forEach((row) => {
+    y += 10;
+    doc.text(String(row.payday), 20, y);
+    doc.text(`PGK ${row.repayment}`, 70, y);
+    doc.text(`PGK ${row.balance}`, 140, y);
+  });
+
+  doc.save("LoanQuote.pdf");
+}
 
