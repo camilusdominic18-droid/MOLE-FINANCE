@@ -658,3 +658,175 @@ Add repayment schedule table to loan calculator
   </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOLE FINANCE Loan Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; }
+    h1 { color: #DAA520; text-align: center; }
+    h2 { color: #DAA520; margin-top: 20px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input { padding: 8px; margin-top: 5px; width: 250px; border-radius: 5px; border: 1px solid #ccc; }
+    button { margin-top: 15px; padding: 10px 15px; border: none; border-radius: 5px; background-color: #DAA520; color: white; font-weight: bold; cursor: pointer; }
+    button:hover { background-color: #b8860b; }
+    #result { margin-top: 20px; font-weight: bold; white-space: pre-line; color: #333; }
+    table { margin-top: 20px; border-collapse: collapse; width: 100%; max-width: 700px; background-color: white; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #DAA520; color: white; }
+    .section { margin-top: 25px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .logo { display: block; margin: 0 auto 20px; max-width: 150px; }
+  </style>
+</head>
+<body>
+  <!-- Logo Placeholder -->
+  <img src="logo.png" alt="MOLE FINANCE Logo" class="logo">
+
+  <h1>MOLE FINANCE Loan Calculator</h1>
+
+  <!-- Client Details Section -->
+  <div class="section">
+    <h2>Client Details</h2>
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" placeholder="Enter full name">
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" placeholder="Enter email">
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" placeholder="Enter phone number">
+  </div>
+
+  <!-- Loan Calculator Section -->
+  <div class="section">
+    <h2>Loan Information</h2>
+    <label for="amount">Loan Amount (PGK):</label>
+    <input type="number" id="amount" placeholder="Enter amount">
+
+    <label for="paydays">Number of Paydays:</label>
+    <input type="number" id="paydays" placeholder="Enter paydays">
+
+    <button onclick="calculateLoan()">Calculate</button>
+    <button onclick="downloadPDF()">Download PDF</button>
+  </div>
+
+  <!-- Result + Schedule -->
+  <div id="result"></div>
+
+  <table id="schedule" style="display:none;">
+    <thead>
+      <tr>
+        <th>Payday</th>
+        <th>Repayment (PGK)</th>
+        <th>Remaining Balance (PGK)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- jsPDF library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    let latestData = null;
+
+    function calculateLoan() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const paydays = parseInt(document.getElementById('paydays').value);
+
+      if (!name || !email || !phone) {
+        document.getElementById('result').textContent = "Please fill in all client details.";
+        document.getElementById('schedule').style.display = "none";
+        return;
+      }
+
+      if (isNaN(amount) || isNaN(paydays) || paydays <= 0) {
+        document.getElementById('result').textContent = "Please enter valid loan values.";
+        document.getElementById('schedule').style.display = "none";
+        return;
+      }
+
+      const repayment = (amount / paydays).toFixed(2);
+      document.getElementById('result').textContent =
+        `Client: ${name} | Email: ${email} | Phone: ${phone}\n` +
+        `Loan Amount: PGK ${amount} | Paydays: ${paydays} | Repayment per payday: PGK ${repayment}`;
+
+      const tbody = document.querySelector("#schedule tbody");
+      tbody.innerHTML = "";
+      let balance = amount;
+      let scheduleData = [];
+
+      for (let i = 1; i <= paydays; i++) {
+        balance -= repayment;
+        const row = document.createElement("tr");
+
+        const paydayCell = document.createElement("td");
+        paydayCell.textContent = i;
+
+        const repaymentCell = document.createElement("td");
+        repaymentCell.textContent = `PGK ${repayment}`;
+
+        const balanceCell = document.createElement("td");
+        balanceCell.textContent = `PGK ${balance.toFixed(2)}`;
+
+        row.appendChild(paydayCell);
+        row.appendChild(repaymentCell);
+        row.appendChild(balanceCell);
+
+        tbody.appendChild(row);
+
+        scheduleData.push({ payday: i, repayment: repayment, balance: balance.toFixed(2) });
+      }
+
+      document.getElementById('schedule').style.display = "table";
+
+      latestData = { name, email, phone, amount, paydays, repayment, scheduleData };
+    }
+
+    async function downloadPDF() {
+      if (!latestData) {
+        alert("Please calculate loan first.");
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFontSize(16);
+      doc.setTextColor(218,165,32); // gold
+      doc.text("MOLE FINANCE Loan Quote", 20, 20);
+
+      doc.setFontSize(12);
+      doc.setTextColor(0,0,0);
+      doc.text(`Client: ${latestData.name}`, 20, 35);
+      doc.text(`Email: ${latestData.email}`, 20, 42);
+      doc.text(`Phone: ${latestData.phone}`, 20, 49);
+
+      doc.text(`Loan Amount: PGK ${latestData.amount}`, 20, 65);
+      doc.text(`Paydays: ${latestData.paydays}`, 20, 72);
+      doc.text(`Repayment per payday: PGK ${latestData.repayment}`, 20, 79);
+
+      // Table header
+      let y = 95;
+      doc.setTextColor(218,165,32);
+      doc.text("Payday", 20, y);
+      doc.text("Repayment (PGK)", 70, y);
+      doc.text("Remaining Balance (PGK)", 140, y);
+
+      doc.setTextColor(0,0,0);
+      latestData.scheduleData.forEach((row) => {
+        y += 10;
+        doc.text(String(row.payday), 20, y);
+        doc.text(`PGK ${row.repayment}`, 70, y);
+        doc.text(`PGK ${row.balance}`, 140, y);
+      });
+
+      doc.save("LoanQuote.pdf");
+    }
+  </script>
+</body>
+</html>
