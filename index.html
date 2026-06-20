@@ -1222,3 +1222,19 @@ Download/
  │    ├── logo.png
  │    └── letterhead.png
 doc.addImage("assets/letterhead.png", "PNG", 10, 10, 190, 40);
+function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Load letterhead image
+  const img = new Image();
+  img.src = "assets/letterhead.png";
+  img.onload = function() {
+    doc.addImage(img, "PNG", 10, 10, 190, 40);
+
+    doc.setFontSize(12);
+    doc.text("Loan Quote", 105, 60, { align: "center" });
+
+    doc.save("LoanQuote.pdf");
+  };
+}
