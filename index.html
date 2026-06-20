@@ -1449,3 +1449,97 @@ function downloadPDF() {
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOLE FINANCE Loan Calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    header { text-align: center; margin-bottom: 20px; }
+    .logo { height: 80px; }
+    h1 { color: gold; }
+    label { display: block; margin-top: 10px; }
+    button { padding: 10px 20px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- Logo in Web UI -->
+  <header>
+    <img src="assets/logo.png" alt="MOLE FINANCE Logo" class="logo">
+    <h1>MOLE FINANCE Loan Calculator</h1>
+  </header>
+
+  <!-- Calculator UI -->
+  <label>Client Name: <input type="text" id="clientName" value="CAMILUS DOMINIC"></label>
+  <label>Email: <input type="email" id="clientEmail" value="camilusdominic18@gmail.com"></label>
+  <label>Phone: <input type="text" id="clientPhone" value="72958712"></label>
+  <label>Loan Amount (PGK): <input type="number" id="loanAmount" value="3000"></label>
+  <label>Paydays: <input type="number" id="paydays" value="4"></label>
+  <button onclick="downloadPDF()">Download PDF</button>
+
+  <script>
+    function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Get user inputs
+      const clientName = document.getElementById("clientName").value;
+      const clientEmail = document.getElementById("clientEmail").value;
+      const clientPhone = document.getElementById("clientPhone").value;
+      const loanAmount = parseFloat(document.getElementById("loanAmount").value);
+      const paydays = parseInt(document.getElementById("paydays").value);
+      const installment = loanAmount / paydays;
+
+      // Load letterhead image dynamically
+      const img = new Image();
+      img.src = "assets/letterhead.png";
+      img.onload = function() {
+        // Add letterhead banner
+        doc.addImage(img, "PNG", 10, 10, 190, 40);
+
+        // Title
+        doc.setFontSize(14);
+        doc.text("Loan Quote", 105, 60, { align: "center" });
+
+        // Client details
+        doc.setFontSize(12);
+        doc.text("Client Name: " + clientName, 20, 80);
+        doc.text("Email: " + clientEmail, 20, 90);
+        doc.text("Phone: " + clientPhone, 20, 100);
+
+        // Loan summary
+        doc.text("Loan Amount: PGK " + loanAmount.toFixed(2), 20, 120);
+        doc.text("Paydays: " + paydays, 20, 130);
+        doc.text("Installment per Payday: PGK " + installment.toFixed(2), 20, 140);
+
+        // Repayment Schedule Table
+        const startY = 160;
+        doc.setFontSize(12);
+        doc.text("Repayment Schedule:", 20, startY);
+
+        // Table headers
+        doc.setFontSize(11);
+        doc.text("Payday", 20, startY + 15);
+        doc.text("Installment (PGK)", 60, startY + 15);
+        doc.text("Remaining Balance (PGK)", 120, startY + 15);
+
+        // Table rows
+        let balance = loanAmount;
+        for (let i = 1; i <= paydays; i++) {
+          balance -= installment;
+          doc.text(i.toString(), 20, startY + 15 + i * 10);
+          doc.text(installment.toFixed(2), 60, startY + 15 + i * 10);
+          doc.text(balance > 0 ? balance.toFixed(2) : "0.00", 120, startY + 15 + i * 10);
+        }
+
+        // Save PDF
+        doc.save("LoanQuote.pdf");
+      };
+    }
+  </script>
+
+</body>
+</html>
