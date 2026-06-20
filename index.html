@@ -1238,3 +1238,55 @@ function downloadPDF() {
     doc.save("LoanQuote.pdf");
   };
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOLE FINANCE Loan Calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    header { text-align: center; margin-bottom: 20px; }
+    .logo { height: 80px; }
+    h1 { color: gold; }
+  </style>
+</head>
+<body>
+
+  <!-- Logo in Web UI -->
+  <header>
+    <img src="assets/logo.png" alt="MOLE FINANCE Logo" class="logo">
+    <h1>MOLE FINANCE Loan Calculator</h1>
+  </header>
+
+  <!-- Calculator UI (simplified for example) -->
+  <button onclick="downloadPDF()">Download PDF</button>
+
+  <script>
+    function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Load letterhead image dynamically
+      const img = new Image();
+      img.src = "assets/letterhead.png";
+      img.onload = function() {
+        doc.addImage(img, "PNG", 10, 10, 190, 40);
+
+        doc.setFontSize(14);
+        doc.text("Loan Quote", 105, 60, { align: "center" });
+
+        // Example content
+        doc.setFontSize(12);
+        doc.text("Client Name: John Doe", 20, 80);
+        doc.text("Loan Amount: K10,000", 20, 90);
+        doc.text("Repayment Schedule:", 20, 110);
+
+        // Save PDF
+        doc.save("LoanQuote.pdf");
+      };
+    }
+  </script>
+
+</body>
+</html>
