@@ -1987,3 +1987,59 @@ Download/
 │   ├── logo.png
 │   └── letterhead.png
 └── README.md
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOLE MINI FINANCE - Payslip Verification</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+  <script src="payslip.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="MOLE MINI FINANCE Logo" height="80">
+    <h1>Payslip Verification Form</h1>
+  </header>
+
+  <main>
+    <form id="payslipForm">
+      <label>Full Name:</label>
+      <input type="text" id="name" required>
+
+      <label>Employer:</label>
+      <input type="text" id="employer" required>
+
+      <label>Employee ID / Payroll Number:</label>
+      <input type="text" id="employeeId" required>
+
+      <label>Email:</label>
+      <input type="email" id="email" required>
+
+      <label>Phone:</label>
+      <input type="tel" id="phone" required>
+
+      <label>Loan Amount Requested:</label>
+      <input type="number" id="loanAmount" required>
+
+      <label>Purpose of Loan:</label>
+      <input type="text" id="purpose" required>
+
+      <label>
+        <input type="checkbox" id="consent" required>
+        I authorize MOLE MINI FINANCE to use my payslip for loan verification.
+      </label>
+
+      <label>Upload Payslip (PDF/Image):</label>
+      <input type="file" id="payslipFile" accept=".pdf,.jpg,.jpeg,.png" required>
+
+      <button type="submit">Generate Verification PDF</button>
+    </form>
+  </main>
+</body>
+</html>
