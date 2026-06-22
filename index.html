@@ -2043,3 +2043,72 @@ Download/
   </main>
 </body>
 </html>
+// Firebase config (replace with your own values from Firebase Console)
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "molefinancepayslip.firebaseapp.com",
+  projectId: "molefinancepayslip",
+  storageBucket: "molefinancepayslip.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+document.getElementById("payslipForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const clientData = {
+    name: document.getElementById("name").value,
+    employer: document.getElementById("employer").value,
+    employeeId: document.getElementById("employeeId").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    loanAmount: document.getElementById("loanAmount").value,
+    purpose: document.getElementById("purpose").value,
+    consent: document.getElementById("consent").checked,
+    timestamp: new Date().toISOString()
+  };
+
+  // Save consent record
+  try {
+    await db.collection("consents").add(clientData);
+    alert("Consent record saved securely.");
+  } catch (error) {
+    console.error("Error saving consent:", error);
+    alert("Failed to save consent. Please try again.");
+  }
+
+  // Generate PDF
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  const logo = new Image();
+  logo.src = "assets/logo.png";
+
+  logo.onload = function() {
+    doc.addImage(logo, "PNG", 10, 10, 30, 30);
+    doc.setFontSize(16);
+    doc.text("MOLE MINI FINANCE - Payslip Verification", 50, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Name: ${clientData.name}`, 20, 50);
+    doc.text(`Employer: ${clientData.employer}`, 20, 60);
+    doc.text(`Employee ID: ${clientData.employeeId}`, 20, 70);
+    doc.text(`Email: ${clientData.email}`, 20, 80);
+    doc.text(`Phone: ${clientData.phone}`, 20, 90);
+    doc.text(`Loan Amount: PGK ${clientData.loanAmount}`, 20, 100);
+    doc.text(`Purpose: ${clientData.purpose}`, 20, 110);
+
+    doc.setTextColor(0, 128, 0);
+    doc.text("✔ Client consent provided for payslip verification.", 20, 130);
+
+    doc.setTextColor(255, 0, 0);
+    doc.setFontSize(20);
+    doc.text("VERIFIED FOR LOAN PROCESSING", 20, 160);
+
+    doc.save("Payslip_Verification.pdf");
+  };
+});
