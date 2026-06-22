@@ -1938,3 +1938,41 @@ feat: add manual light/dark mode toggle
   </main>
 </body>
 </html>
+document.getElementById("payslipForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Load logo
+  const logo = new Image();
+  logo.src = "assets/logo.png";
+
+  logo.onload = function() {
+    doc.addImage(logo, "PNG", 10, 10, 30, 30);
+    doc.setFontSize(16);
+    doc.text("MOLE MINI FINANCE - Payslip Verification", 50, 20);
+
+    // Client details
+    doc.setFontSize(12);
+    doc.text(`Name: ${document.getElementById("name").value}`, 20, 50);
+    doc.text(`Employer: ${document.getElementById("employer").value}`, 20, 60);
+    doc.text(`Employee ID: ${document.getElementById("employeeId").value}`, 20, 70);
+    doc.text(`Email: ${document.getElementById("email").value}`, 20, 80);
+    doc.text(`Phone: ${document.getElementById("phone").value}`, 20, 90);
+    doc.text(`Loan Amount: PGK ${document.getElementById("loanAmount").value}`, 20, 100);
+    doc.text(`Purpose: ${document.getElementById("purpose").value}`, 20, 110);
+
+    // Consent confirmation
+    doc.setTextColor(0, 128, 0);
+    doc.text("✔ Client consent provided for payslip verification.", 20, 130);
+
+    // Verification stamp
+    doc.setTextColor(255, 0, 0);
+    doc.setFontSize(20);
+    doc.text("VERIFIED FOR LOAN PROCESSING", 20, 160);
+
+    // Save PDF
+    doc.save("Payslip_Verification.pdf");
+  };
+});
