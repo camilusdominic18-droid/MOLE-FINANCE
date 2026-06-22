@@ -1785,3 +1785,98 @@ https://molefinance.com
   </p>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOLE FINANCE Loan Calculator</title>
+
+  <!-- Reusable styles -->
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000000;
+      font-family: Arial, sans-serif;
+      transition: 0.3s;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    .mole-link {
+      color: gold;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .mole-link:hover {
+      text-decoration: underline;
+      color: #d4af37;
+    }
+
+    .mole-button {
+      background-color: gold;
+      color: black;
+      font-weight: bold;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .mole-button:hover {
+      background-color: #d4af37;
+      color: white;
+    }
+
+    /* Toggle button */
+    #theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #333;
+      color: gold;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    #theme-toggle:hover {
+      background-color: gold;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme toggle button -->
+  <button id="theme-toggle">🌙 Dark Mode</button>
+
+  <!-- Your existing calculator content -->
+  <button class="mole-button">Calculate</button>
+  <button class="mole-button">Download PDF</button>
+
+  <!-- Centered Mole Finance link -->
+  <p style="text-align:center; margin-top:20px;">
+    <a href="https://molefinance.com" target="_blank" class="mole-link">
+      Visit Mole Finance
+    </a>
+  </p>
+
+  <!-- Script for toggle -->
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        toggleBtn.textContent = '☀️ Light Mode';
+      } else {
+        toggleBtn.textContent = '🌙 Dark Mode';
+      }
+    });
+  </script>
+</body>
+</html>
