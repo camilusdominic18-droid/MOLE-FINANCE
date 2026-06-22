@@ -2112,3 +2112,20 @@ document.getElementById("payslipForm").addEventListener("submit", async function
     doc.save("Payslip_Verification.pdf");
   };
 });
+async function exportConsents() {
+  const snapshot = await db.collection("consents").get();
+  let csv = "Name,Employer,EmployeeID,Email,Phone,LoanAmount,Purpose,Consent,Timestamp\n";
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    csv += `${data.name},${data.employer},${data.employeeId},${data.email},${data.phone},${data.loanAmount},${data.purpose},${data.consent},${data.timestamp}\n`;
+  });
+
+  // Download CSV
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "consent_records.csv";
+  a.click();
+}
