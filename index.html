@@ -2187,3 +2187,120 @@ async function exportConsents() {
   }
 }
 Name | Employer | EmployeeID | Email | Phone | LoanAmount | Purpose | Consent | Timestamp
+async function exportConsents() {
+  try {
+    const snapshot = await db.collection("consents").get();
+
+    let csv = "MOLE MINI FINANCE - Consent Records Report\n";
+    csv += "Generated: " + new Date().toLocaleString() + "\n\n";
+    csv += "Name,Employer,EmployeeID,Email,Phone,LoanAmount,Purpose,Consent,Timestamp\n";
+
+    let totalLoan = 0;
+    let totalClients = 0;
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      csv += `"${data.name}","${data.employer}","${data.employeeId}","${data.email}","${data.phone}","${data.loanAmount}","${data.purpose}","${data.consent}","${data.timestamp}"\n`;
+
+      totalLoan += parseFloat(data.loanAmount || 0);
+      totalClients++;
+    });
+
+    // Add summary section
+    csv += "\nSummary Totals\n";
+    csv += `Total Clients,${totalClients}\n`;
+    csv += `Total Loan Amount Requested,PGK ${totalLoan.toFixed(2)}\n`;
+
+    // Create downloadable CSV file
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "MOLE_FINANCE_Consent_Report.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    alert("Consent records exported successfully with summary totals.");
+  } catch (error) {
+    console.error("Error exporting consents:", error);
+    alert("Failed to export records. Please try again.");
+  }
+}
+async function exportConsents() {
+  try {
+    const snapshot = await db.collection("consents").get();
+
+    let csv = "MOLE MINI FINANCE - Consent Records Report\n";
+    csv += "Generated: " + new Date().toLocaleString() + "\n\n";
+    csv += "Name,Employer,EmployeeID,Email,Phone,LoanAmount,Purpose,Consent,Timestamp\n";
+
+    let totalLoan = 0;
+    let totalClients = 0;
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      csv += `"${data.name}","${data.employer}","${data.employeeId}","${data.email}","${data.phone}","${data.loanAmount}","${data.purpose}","${data.consent}","${data.timestamp}"\n`;
+
+      totalLoan += parseFloat(data.loanAmount || 0);
+      totalClients++;
+    });
+
+    // Add summary section
+    csv += "\nSummary Totals\n";
+    csv += `Total Clients,${totalClients}\n`;
+    csv += `Total Loan Amount Requested,PGK ${totalLoan.toFixed(2)}\n`;
+
+    // Create downloadable CSV file
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "MOLE_FINANCE_Consent_Report.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    alert("Consent records exported successfully with summary totals.");
+  } catch (error) {
+    console.error("Error exporting consents:", error);
+    alert("Failed to export records. Please try again.");
+  }
+}
+async function exportConsents() {
+  try {
+    const snapshot = await db.collection("consents").get();
+
+    let csv = "MOLE MINI FINANCE - Consent Records Report\n";
+    csv += "Generated: " + new Date().toLocaleString() + "\n\n";
+    csv += "Name,Employer,EmployeeID,Email,Phone,LoanAmount,Purpose,Consent,Timestamp\n";
+
+    let totalLoan = 0;
+    let totalClients = 0;
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      csv += `"${data.name}","${data.employer}","${data.employeeId}","${data.email}","${data.phone}","${data.loanAmount}","${data.purpose}","${data.consent}","${data.timestamp}"\n`;
+
+      totalLoan += parseFloat(data.loanAmount || 0);
+      totalClients++;
+    });
+
+    // Add summary section
+    csv += "\nSummary Totals\n";
+    csv += `Total Clients,${totalClients}\n`;
+    csv += `Total Loan Amount Requested,PGK ${totalLoan.toFixed(2)}\n`;
+
+    // Create downloadable CSV file
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "MOLE_FINANCE_Consent_Report.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    alert("Consent records exported successfully with summary totals.");
+  } catch (error) {
+    console.error("Error exporting consents:", error);
+    alert("Failed to export records. Please try again.");
+  }
+}
