@@ -2131,3 +2131,28 @@ async function exportConsents() {
 }
 <button type="button" onclick="exportConsents()">Export Consent Records</button>
 <button type="button" onclick="exportConsents()">Export Consent Records</button>
+async function exportConsents() {
+  try {
+    const snapshot = await db.collection("consents").get();
+    let csv = "Name,Employer,EmployeeID,Email,Phone,LoanAmount,Purpose,Consent,Timestamp\n";
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      csv += `${data.name},${data.employer},${data.employeeId},${data.email},${data.phone},${data.loanAmount},${data.purpose},${data.consent},${data.timestamp}\n`;
+    });
+
+    // Create downloadable CSV file
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "consent_records.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    alert("Consent records exported successfully.");
+  } catch (error) {
+    console.error("Error exporting consents:", error);
+    alert("Failed to export records. Please try again.");
+  }
+}
