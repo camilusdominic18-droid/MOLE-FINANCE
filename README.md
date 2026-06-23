@@ -747,3 +747,36 @@ git pull origin main
 - Clear roadmap for future features
 
 *"Helping Hand is a Caring Hand"*
+# Changelog – MOLE MINI FINANCE
+
+All notable changes to this project will be documented here.  
+This project follows [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH).
+
+---
+
+## [v1.0.0] – 2026-06-23
+### 🚀 Initial Release
+- Loan Calculator hosted on GitHub Pages
+- Dummy Excel Database (`MOLE_FINANCE_Database.xlsx`)
+- Dashboard screenshot (`dashboard.png`)
+- Complete documentation set:
+  - README.md (badges, branding, demo link, roadmap, credits)
+  - LICENSE.md (MIT License)
+  - CONTRIBUTING.md (collaboration guidelines)
+  - ROADMAP.md (future milestones)
+  - CREDITS.md (acknowledgements)
+  - SUPPORT.md (help and contact info)
+  - SECURITY.md (responsible disclosure)
+  - ISSUE Templates (bug reports + feature requests)
+  - PULL_REQUEST_TEMPLATE.md (PR checklist)
+
+---
+
+## [Unreleased]
+### 🛠️ Planned
+- CSV → Excel automated import workflow
+- Employer compliance reporting
+- Dark mode toggle for GitHub Pages calculator
+- Mobile responsiveness improvements
+- EmailJS integration for loan quotes
+- Enhanced dashboard with overdue loan alerts
