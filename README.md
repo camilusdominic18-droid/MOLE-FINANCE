@@ -437,3 +437,54 @@ This document acknowledges the people, tools, and resources that have contribute
 ---
 
 *"Helping Hand is a Caring Hand"*
+# Support – MOLE MINI FINANCE
+
+We want MOLE MINI FINANCE to be easy to use and accessible for both officers and clients.  
+This document explains how to get help, report issues, and request new features.
+
+---
+
+## 🆘 Getting Help
+- **Loan Calculator Issues**  
+  If the GitHub Pages calculator is not working, please refresh your browser or clear cache.  
+  If problems persist, open an issue in this repo.
+
+- **Excel Database Template**  
+  For questions about formulas, sheet structure, or dashboard setup, check the README.md and ROADMAP.md.  
+  If you still need help, open a support issue.
+
+---
+
+## 📝 Reporting Issues
+- Go to the **Issues** tab in this repository.  
+- Click **New Issue** and describe the problem clearly.  
+- Include screenshots or error messages if possible.  
+- Tag your issue with one of these labels:
+  - `bug` – Something isn’t working  
+  - `enhancement` – Suggest a new feature  
+  - `documentation` – Request improvements to guides or docs  
+
+---
+
+## 💡 Feature Requests
+We welcome ideas to improve MOLE MINI FINANCE!  
+- Open a new issue with the label `enhancement`.  
+- Explain the feature and why it would help officers or clients.  
+- If possible, suggest how it could be implemented (Excel formula, dashboard chart, web calculator update).
+
+---
+
+## 📞 Contact
+For direct inquiries:  
+- **Email:** info@molefinance.pg  
+- **Phone:** 72958712 / 71720062 / 82493350  
+
+---
+
+## 🙏 Community Support
+- Officers and clients in **Aitape/Lumi District, Sandaun Province** can reach out locally for training.  
+- Contributions from the open‑source community are encouraged — see [CONTRIBUTING.md](CONTRIBUTING.md).  
+
+---
+
+*"Helping Hand is a Caring Hand"*
