@@ -597,3 +597,48 @@ contact_links:
   - name: Community Support
     url: https://github.com/camilusdominic18-droid/MOLE-FINANCE/blob/main/SUPPORT.md
     about: Please check SUPPORT.md for help before opening a new issue.
+# Pull Request – MOLE MINI FINANCE
+
+Thank you for contributing to MOLE MINI FINANCE!  
+Please complete the checklist below to help us review your changes.
+
+---
+
+## 📋 Description
+- What does this PR do?
+- Why is it needed?
+
+---
+
+## 🔄 Changes Made
+- [ ] Added new feature
+- [ ] Fixed a bug
+- [ ] Updated documentation
+- [ ] Improved dashboard/Excel template
+- [ ] Other (please describe)
+
+---
+
+## ✅ Checklist
+- [ ] My code follows the project’s style guidelines
+- [ ] I have tested the loan calculator on GitHub Pages
+- [ ] I have tested the Excel formulas and dashboard
+- [ ] I have updated README.md if necessary
+- [ ] I have added screenshots for new dashboard features (if applicable)
+- [ ] I have updated ROADMAP.md if this PR adds new milestones
+- [ ] I have updated CREDITS.md if new contributors/tools are acknowledged
+
+---
+
+## 📸 Screenshots (if applicable)
+Attach screenshots of new features, dashboards, or bug fixes.
+
+---
+
+## 📌 Related Issues
+Link any related issues here (e.g., `Fixes #12`).
+
+---
+
+## 🙏 Notes for Reviewers
+Add any extra context or details reviewers should know.
