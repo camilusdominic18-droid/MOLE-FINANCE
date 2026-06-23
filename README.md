@@ -712,3 +712,8 @@ git push origin main
 ## 📊 Dashboard Preview
 
 ![Dashboard Preview](templates/dashboard.png)
+# Navigate to your repo
+cd MOLE-FINANCE
+
+# Pull latest changes
+git pull origin main
