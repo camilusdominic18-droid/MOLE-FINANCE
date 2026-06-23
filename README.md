@@ -780,3 +780,29 @@ This project follows [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PAT
 - Mobile responsiveness improvements
 - EmailJS integration for loan quotes
 - Enhanced dashboard with overdue loan alerts
+# Release Checklist – MOLE MINI FINANCE
+
+This document provides a step‑by‑step guide for publishing new releases of MOLE MINI FINANCE.  
+Follow this checklist to ensure each release is consistent, professional, and complete.
+
+---
+
+## 🔹 Pre‑Release Checklist
+- [ ] Ensure all code and documentation changes are committed to `main`
+- [ ] Update `README.md` with any new features or screenshots
+- [ ] Update `ROADMAP.md` with completed and upcoming milestones
+- [ ] Update `CHANGELOG.md` with version details
+- [ ] Verify `LICENSE.md`, `CONTRIBUTING.md`, `CREDITS.md`, `SUPPORT.md`, and `SECURITY.md` are up to date
+- [ ] Test GitHub Pages loan calculator for functionality
+- [ ] Validate Excel database template (`MOLE_FINANCE_Database.xlsx`) formulas and dashboard
+- [ ] Add or update dashboard screenshot (`dashboard.png`) if needed
+
+---
+
+## 🔹 Tagging the Release
+```bash
+# Create a new version tag
+git tag -a vX.Y.Z -m "MOLE FINANCE Loan Calculator – Release vX.Y.Z"
+
+# Push the tag to GitHub
+git push origin vX.Y.Z
