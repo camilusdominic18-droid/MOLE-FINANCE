@@ -716,4 +716,9 @@ git push origin main
 cd MOLE-FINANCE
 
 # Pull latest changes
+# Create a tag for version 1.0.0
+git tag -a v1.0.0 -m "MOLE FINANCE Loan Calculator – Initial Release"
+
+# Push the tag to GitHub
+git push origin v1.0.0
 git pull origin main
