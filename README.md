@@ -333,3 +333,15 @@ git checkout -b feature/your-feature-name
 git commit -m "Add dashboard chart for overdue loans"
 git push origin feature/your-feature-name
 
+---
+
+## ✅ Repo Structure After Commit
+- `README.md` → Badges, branding, demo link, Excel template, dashboard visuals, roadmap, credits.  
+- `LICENSE.md` → MIT License.  
+- `CONTRIBUTING.md` → Guidelines for collaboration.  
+
+---
+
+👉 Next step: Once you commit this file, your repo will be **fully professional** with README, LICENSE, and CONTRIBUTING in place.  
+
+Would you like me to also draft a **ROADMAP.md file** (detailed checklist of upcoming features and milestones) so your repo shows clear future plans?
