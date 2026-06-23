@@ -642,3 +642,55 @@ Link any related issues here (e.g., `Fixes #12`).
 
 ## 🙏 Notes for Reviewers
 Add any extra context or details reviewers should know.
+# Security Policy – MOLE MINI FINANCE
+
+We take the security of MOLE MINI FINANCE seriously.  
+This document explains how to report vulnerabilities and our approach to responsible disclosure.
+
+---
+
+## 🔒 Supported Versions
+We currently support security updates for:
+- **Main branch** (active development)
+- **Latest release** (stable version)
+
+Older versions may not receive security patches.
+
+---
+
+## 🛡️ Reporting a Vulnerability
+If you discover a security issue, please follow these steps:
+
+1. **Do not open a public issue.**  
+   Security vulnerabilities should be reported privately.
+
+2. **Contact us directly:**  
+   - Email: info@molefinance.pg  
+   - Phone: 72958712 / 71720062 / 82493350  
+
+3. **Provide details:**  
+   - Description of the vulnerability  
+   - Steps to reproduce  
+   - Potential impact  
+   - Suggested fix (if known)
+
+---
+
+## ⚖️ Responsible Disclosure
+- We will acknowledge receipt of your report within **72 hours**.  
+- We will investigate and provide a status update within **7 days**.  
+- Fixes will be prioritized and released as soon as possible.  
+- Credit will be given to reporters who follow responsible disclosure practices.
+
+---
+
+## 🚫 What Not to Do
+- Do not publicly disclose vulnerabilities before a fix is released.  
+- Do not exploit vulnerabilities for unauthorized access or data extraction.  
+- Do not use vulnerabilities to disrupt services.
+
+---
+
+## 🙏 Thank You
+We appreciate the community’s help in keeping MOLE MINI FINANCE secure.  
+*"Helping Hand is a Caring Hand"*
