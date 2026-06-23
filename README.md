@@ -315,3 +315,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+# Contributing to MOLE MINI FINANCE
+
+Thank you for your interest in contributing!  
+MOLE MINI FINANCE is an open‑source project providing a loan calculator, Excel database toolkit, and dashboard reporting system for community finance officers.
+
+---
+
+## 🛠️ How to Contribute
+
+### 1. Fork the Repository
+- Click the **Fork** button at the top of this repo.
+- Clone your fork locally:
+  ```bash
+  git clone https://github.com/your-username/MOLE-FINANCE.git
