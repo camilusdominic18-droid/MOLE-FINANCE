@@ -573,3 +573,22 @@ If applicable, add screenshots to help explain your problem.
 
 ## 📌 Additional Context
 Add any other context about the problem here.
+---
+name: Feature Request
+about: Suggest an idea for MOLE MINI FINANCE
+title: "[FEATURE] "
+labels: enhancement
+assignees: ''
+---
+
+## 💡 Feature Description
+A clear and concise description of the feature you’d like to see.
+
+## 🎯 Why Is This Needed?
+Explain why this feature would help officers, clients, or contributors.
+
+## 🛠️ Possible Implementation
+If you have ideas on how to implement it (Excel formula, dashboard chart, web calculator update), describe them here.
+
+## 📌 Additional Context
+Add any other context, screenshots, or examples here.
