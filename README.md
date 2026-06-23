@@ -330,3 +330,4 @@ MOLE MINI FINANCE is an open‑source project providing a loan calculator, Excel
   ```bash
   git clone https://github.com/your-username/MOLE-FINANCE.git
 git checkout -b feature/your-feature-name
+git checkout -b feature/your-feature-name
