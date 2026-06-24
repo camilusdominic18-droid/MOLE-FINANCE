@@ -834,6 +834,7 @@ git push origin vX.Y.Z
 - `SECURITY.md` → Vulnerability reporting and responsible disclosure  
 - `CHANGELOG.md` → Version history and updates  
 - `RELEASE.md` → Step‑by‑step release workflow  
+git clone https://github.com/camilusdominic18-droid/MOLE-FINANCE.git
 
 ---
 
@@ -847,3 +848,4 @@ Would you like me to also prepare a **README badge for “Latest Release”** (a
 ### Features
 - [Your important features here]
 cd Desktop
+git clone https://github.com/camilusdominic18-droid/MOLE-FINANCE.git
